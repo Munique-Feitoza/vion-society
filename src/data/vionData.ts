@@ -32,6 +32,7 @@ export interface Stay {
 
 export interface MapNode {
   name: string;
+  shortName: string;
   region: string;
   tag: string;
   elevation: string;
@@ -65,6 +66,7 @@ export const CURRENCY_RATES: Record<string, { rate: number; symbol: string; pref
 export const MAP_NODES: Record<string, MapNode> = {
   colombo: {
     name: 'Colombo & Negombo',
+    shortName: 'Colombo',
     region: 'Western Province',
     tag: 'Arrival & Colonial Heritage',
     elevation: '12m above sea',
@@ -76,6 +78,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   sigiriya: {
     name: 'Sigiriya & Cultural Triangle',
+    shortName: 'Sigiriya',
     region: 'Central North',
     tag: '5th-Century Sky Citadel',
     elevation: '190m above sea',
@@ -87,6 +90,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   kandy: {
     name: 'Kandy Royal Kingdom',
+    shortName: 'Kandy',
     region: 'Central Highlands',
     tag: 'Sacred Relic & Tea Foothills',
     elevation: '500m above sea',
@@ -98,6 +102,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   hatton: {
     name: 'Hatton & Ceylon Tea Trails',
+    shortName: 'Hatton',
     region: 'Golden Tea Valleys',
     tag: 'Colonial Planters & Castlereagh',
     elevation: '1,250m above sea',
@@ -109,6 +114,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   ella: {
     name: 'Ella & Cloud Peaks',
+    shortName: 'Ella',
     region: 'Uva Province',
     tag: 'Scenic Railway & Waterfalls',
     elevation: '1,041m above sea',
@@ -120,6 +126,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   yala: {
     name: 'Yala National Park',
+    shortName: 'Yala',
     region: 'Wild Southern Coast',
     tag: 'Untamed Leopard Wilderness',
     elevation: '30m above sea',
@@ -131,6 +138,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   galle: {
     name: 'UNESCO Galle Fort',
+    shortName: 'Galle Fort',
     region: 'Southern Province',
     tag: '17th-Century Ramparts & Jewelers',
     elevation: '10m above sea',
@@ -142,6 +150,7 @@ export const MAP_NODES: Record<string, MapNode> = {
   },
   mirissa: {
     name: 'Weligama & Mirissa Bay',
+    shortName: 'Mirissa',
     region: 'Indian Ocean Coast',
     tag: 'Blue Whales & Barefoot Surf',
     elevation: '5m above sea',

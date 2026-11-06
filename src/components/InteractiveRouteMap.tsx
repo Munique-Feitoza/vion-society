@@ -117,36 +117,60 @@ export default function InteractiveRouteMap({ onIncludeRegion, translations }: I
 
                 return (
                   <g key={key} className="cursor-pointer group" onClick={() => setSelectedNodeKey(key)}>
+                    {/* Pulsing Selection Rings */}
+                    {isSelected && (
+                      <>
+                        <circle
+                          cx={node.x}
+                          cy={node.y}
+                          r="14"
+                          fill="none"
+                          stroke="#C5A880"
+                          strokeWidth="1.5"
+                          className="animate-pulse"
+                        />
+                        <circle
+                          cx={node.x}
+                          cy={node.y}
+                          r="18"
+                          fill="none"
+                          stroke="#C5A880"
+                          strokeWidth="1"
+                          strokeDasharray="2,2"
+                          opacity="0.6"
+                        />
+                      </>
+                    )}
+
+                    {/* Node Core Circle */}
                     <circle
                       cx={node.x}
                       cy={node.y}
-                      r={isSelected ? 9 : isInPreset ? 6 : 4}
+                      r={isSelected ? 8 : isInPreset ? 6 : 4}
                       fill={isSelected ? "#E2CCA9" : isInPreset ? "#C5A880" : "#556577"}
                       stroke={isSelected ? "#FFFFFF" : "#14181E"}
                       strokeWidth={isSelected ? "2.5" : "1"}
-                      className="transition-all duration-300"
+                      className="transition-all duration-300 group-hover:scale-125"
                     />
-                    {isSelected && (
-                      <circle
-                        cx={node.x}
-                        cy={node.y}
-                        r="16"
-                        fill="none"
-                        stroke="#C5A880"
-                        strokeWidth="1"
-                        opacity="0.6"
-                        className="animate-ping"
-                      />
-                    )}
+
+                    {/* Node Label with Clean Positioning */}
                     <text
-                      x={node.x + (key === "colombo" ? -55 : key === "galle" ? -50 : 12)}
+                      x={
+                        key === "colombo"
+                          ? node.x - 55
+                          : key === "galle"
+                          ? node.x - 55
+                          : key === "hatton"
+                          ? node.x - 48
+                          : node.x + 12
+                      }
                       y={node.y + 4}
-                      fill="#F7F4EE"
+                      fill={isSelected ? "#C5A880" : isInPreset ? "#F7F4EE" : "#8F9CAE"}
                       fontSize="9"
-                      fontFamily="system-ui"
-                      fontWeight={isSelected ? 700 : 500}
+                      fontFamily="system-ui, sans-serif"
+                      fontWeight={isSelected ? 700 : isInPreset ? 600 : 400}
                     >
-                      {node.name.split(" ")[0]}
+                      {node.shortName}
                     </text>
                   </g>
                 );
