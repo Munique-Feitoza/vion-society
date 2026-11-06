@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VION SOCIETY — Sri Lanka Bespoke Luxury Travel Platform
 
-## Getting Started
+> Built with **Next.js 15 (App Router)**, **TypeScript**, and **Tailwind CSS v4**. Engineered as a high-conversion, slow-luxury digital operating system for **VION Society (Sri Lanka)**.
 
-First, run the development server:
+---
 
+## ✦ Platform Architecture & Key Features
+
+* **Live Colombo Time & Weather Indicator:** Real-time Ceylon time display (`GMT+5:30`) and climate status.
+* **Masterpiece Signature Collections:** Highlighting **VION HEAVEN**, **VION SIGNATURE**, and **VION CURATED** tiers with slide-out day-by-day expedition drawers.
+* **Geospatial Route Explorer:** Interactive vector SVG map of Sri Lanka connecting Colombo, Sigiriya, Kandy, Hatton, Ella, Yala, and Galle Fort with live drive pacing and elevation profiles.
+* **Curated Stays & Private Villas:** Relais & Châteaux tea bungalows, ocean cocoon glamping, and colonial fort mansions with quick-view modal previews.
+* **Custom Route Architect (Trip Builder):** Multi-step journey customizer with real-time budget calculator across multiple currencies (USD, EUR, GBP, AUD, LKR) and direct WhatsApp lead dispatch.
+* **A-Z Travel Hub (Know Before You Depart):** Instant guidance covering Visa/ETA, Dual Monsoon weather systems, and private chauffeur protocols.
+* **Ambient Sound Synthesizer:** Subtle Web Audio API ambient audio recreating Ceylon rain mist.
+
+---
+
+## 🛠 Tech Stack
+
+* **Framework:** [Next.js 15](https://nextjs.org/) (Turbopack, App Router, React 19)
+* **Language:** [TypeScript](https://www.typescriptlang.org/) (Strict mode)
+* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+* **Icons:** [Lucide React](https://lucide.dev/)
+* **Deployment:** Ready for [Vercel](https://vercel.com/) / [GitHub Pages](https://pages.github.com/)
+
+---
+
+## 🚀 Getting Started
+
+### Local Development:
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Production Build:
+```bash
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Designed & Engineered for VION Society.*
