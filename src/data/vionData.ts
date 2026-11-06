@@ -306,3 +306,4 @@ export const STAYS: Stay[] = [
     description: 'Sri Lanka’s premier sustainable wellness sanctuary set in 48 acres of pristine mountain forest. World-class restorative architecture and gourmet Ayurvedic dining.'
   }
 ];
+

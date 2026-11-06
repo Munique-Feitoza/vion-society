@@ -3,13 +3,15 @@
 import { useState } from "react";
 import { CURRENCY_RATES } from "@/data/vionData";
 import { Sliders, MessageCircle, Check } from "lucide-react";
+import { Translations } from "@/data/translations";
 
 interface TripBuilderProps {
   currency: string;
   prefillNotes?: string;
+  translations?: Translations["tripBuilder"];
 }
 
-export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilderProps) {
+export default function TripBuilder({ currency, prefillNotes = "", translations }: TripBuilderProps) {
   const [style, setStyle] = useState("Tea Highlands & Mist");
   const [durationDays, setDurationDays] = useState(10);
   const [guests, setGuests] = useState(2);
@@ -22,6 +24,24 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
   const [guestName, setGuestName] = useState("");
   const [month, setMonth] = useState("February");
   const [notes, setNotes] = useState(prefillNotes);
+
+  const t = translations || {
+    tag: "Custom Route Architect",
+    title: "Curate Your Bespoke Expedition",
+    desc: "Configure your preferred travel pacing, destinations, and accommodation level. Our real-time engine estimates your journey investment.",
+    step1: "1. Select Your Primary Passion",
+    step2: "2. Expedition Duration",
+    partySize: "Party Size",
+    step3: "3. Luxury Sanctuary Tier",
+    step4: "4. Desired Provinces (Select multiple)",
+    estInvestment: "Estimated Total Journey Investment",
+    perGuest: "/ guest",
+    includes: "Includes private chauffeur SUV, luxury stays, daily breakfast & all national park permits.",
+    yourName: "Your Name",
+    preferredMonth: "Preferred Month",
+    wishes: "Special Wishes or Preferences",
+    ctaWhatsapp: "Commission Journey via WhatsApp Concierge →",
+  };
 
   const tierRates: Record<string, number> = {
     "Boutique Luxury Suites": 420,
@@ -73,13 +93,13 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
         
         <div className="text-center mb-12">
           <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-semibold block mb-3 flex items-center justify-center gap-2">
-            <Sliders className="w-3.5 h-3.5" /> Custom Route Architect
+            <Sliders className="w-3.5 h-3.5" /> {t.tag}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-white font-light mb-3">
-            Curate Your Bespoke Expedition
+            {t.title}
           </h2>
           <p className="text-[#B4B0A5] text-sm font-light max-w-xl mx-auto">
-            Configure your preferred travel pacing, destinations, and accommodation level. Our real-time engine estimates your journey investment.
+            {t.desc}
           </p>
         </div>
 
@@ -89,7 +109,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
           {/* Step 1: Style */}
           <div className="mb-8">
             <label className="block text-xs uppercase tracking-wider text-[#C5A880] font-semibold mb-3">
-              1. Select Your Primary Passion
+              {t.step1}
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
               {[
@@ -118,7 +138,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#C5A880] font-semibold mb-3">
-                2. Expedition Duration
+                {t.step2}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {[7, 10, 14].map((d) => (
@@ -140,7 +160,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
 
             <div>
               <label className="block text-xs uppercase tracking-wider text-[#C5A880] font-semibold mb-3">
-                Party Size
+                {t.partySize}
               </label>
               <div className="grid grid-cols-3 gap-2">
                 {[
@@ -168,7 +188,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
           {/* Step 3: Tier */}
           <div className="mb-8">
             <label className="block text-xs uppercase tracking-wider text-[#C5A880] font-semibold mb-3">
-              3. Luxury Sanctuary Tier
+              {t.step3}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
@@ -182,19 +202,19 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
                   title: "Ultra-Luxury Heritage Tier",
                   desc: "Amangalla, Ceylon Tea Trails, Wild Coast Lodge",
                 },
-              ].map((t) => (
+              ].map((tierItem) => (
                 <button
-                  key={t.id}
+                  key={tierItem.id}
                   type="button"
-                  onClick={() => setTier(t.id)}
+                  onClick={() => setTier(tierItem.id)}
                   className={`p-3.5 rounded-xl text-left border transition-all cursor-pointer ${
-                    tier === t.id
+                    tier === tierItem.id
                       ? "border-[#C5A880] bg-[#C5A880]/20 text-white"
                       : "border-white/10 text-[#B4B0A5] hover:border-white/20 bg-white/5"
                   }`}
                 >
-                  <div className="font-semibold text-white text-xs">{t.title}</div>
-                  <div className="text-[10px] text-[#B4B0A5]/70 mt-0.5">{t.desc}</div>
+                  <div className="font-semibold text-white text-xs">{tierItem.title}</div>
+                  <div className="text-[10px] text-[#B4B0A5]/70 mt-0.5">{tierItem.desc}</div>
                 </button>
               ))}
             </div>
@@ -203,7 +223,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
           {/* Step 4: Provinces */}
           <div className="mb-8">
             <label className="block text-xs uppercase tracking-wider text-[#C5A880] font-semibold mb-3">
-              4. Desired Provinces (Select multiple)
+              {t.step4}
             </label>
             <div className="flex flex-wrap gap-2">
               {[
@@ -238,17 +258,17 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
           <div className="bg-black/60 rounded-2xl p-5 border border-[#C5A880]/30 mb-8 flex flex-col sm:flex-row items-center justify-between">
             <div>
               <div className="text-[10px] uppercase tracking-wider text-[#B4B0A5]/70 font-semibold">
-                Estimated Total Journey Investment
+                {t.estInvestment}
               </div>
               <div className="font-serif text-3xl sm:text-4xl text-[#C5A880] font-normal mt-0.5">
                 {formatPrice(totalUSD)}
               </div>
               <div className="text-[11px] text-[#B4B0A5]">
-                {formatPrice(dailyRate * durationDays)} / guest
+                {formatPrice(dailyRate * durationDays)} {t.perGuest}
               </div>
             </div>
             <div className="text-right mt-4 sm:mt-0 text-[11px] text-[#B4B0A5]/80 max-w-xs">
-              Includes private chauffeur SUV, luxury stays, daily breakfast & all national park permits.
+              {t.includes}
             </div>
           </div>
 
@@ -257,7 +277,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-[#B4B0A5] mb-1 font-medium">
-                  Your Name
+                  {t.yourName}
                 </label>
                 <input
                   type="text"
@@ -269,7 +289,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
               </div>
               <div>
                 <label className="block text-[11px] uppercase tracking-wider text-[#B4B0A5] mb-1 font-medium">
-                  Preferred Month
+                  {t.preferredMonth}
                 </label>
                 <select
                   value={month}
@@ -289,7 +309,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
 
             <div>
               <label className="block text-[11px] uppercase tracking-wider text-[#B4B0A5] mb-1 font-medium">
-                Special Wishes or Preferences
+                {t.wishes}
               </label>
               <input
                 type="text"
@@ -305,7 +325,7 @@ export default function TripBuilder({ currency, prefillNotes = "" }: TripBuilder
               className="w-full bg-[#C5A880] hover:bg-[#D8BC95] text-[#0C0F12] font-semibold text-xs tracking-widest uppercase py-4 rounded-xl transition-all shadow-xl shadow-[#C5A880]/25 flex items-center justify-center space-x-2 cursor-pointer mt-2"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>Commission Journey via WhatsApp Concierge →</span>
+              <span>{t.ctaWhatsapp}</span>
             </button>
           </div>
 

@@ -2,13 +2,29 @@
 
 import { JOURNEYS, CURRENCY_RATES, Journey } from "@/data/vionData";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Translations } from "@/data/translations";
 
 interface SignatureCollectionsProps {
   currency: string;
   onSelectJourney: (journeyId: string) => void;
+  translations?: Translations["signature"];
 }
 
-export default function SignatureCollections({ currency, onSelectJourney }: SignatureCollectionsProps) {
+export default function SignatureCollections({
+  currency,
+  onSelectJourney,
+  translations,
+}: SignatureCollectionsProps) {
+  const t = translations || {
+    tag: "Masterpiece Itineraries",
+    title: "The Signature Collections",
+    desc: "Each route is carefully balanced for road pacing, private chartered train transitions, and secluded luxury sanctuaries. Click any itinerary to review the full day-by-day expedition.",
+    viewItinerary: "View Day-by-Day Plan",
+    from: "From",
+    perGuest: "/ guest",
+    pace: "Pace",
+  };
+
   const formatPrice = (usd: number) => {
     const cfg = CURRENCY_RATES[currency] || CURRENCY_RATES.USD;
     const converted = Math.round(usd * cfg.rate);
@@ -23,12 +39,12 @@ export default function SignatureCollections({ currency, onSelectJourney }: Sign
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-semibold block mb-3 flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5" /> Masterpiece Itineraries
+              <Sparkles className="w-3.5 h-3.5" /> {t.tag}
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">The Signature Collections</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">{t.title}</h2>
           </div>
           <p className="text-[#B4B0A5] max-w-md text-sm mt-4 md:mt-0 font-light leading-relaxed">
-            Each route is carefully balanced for road pacing, private chartered train transitions, and secluded luxury sanctuaries. Click any itinerary to review the full day-by-day expedition.
+            {t.desc}
           </p>
         </div>
 
@@ -50,7 +66,7 @@ export default function SignatureCollections({ currency, onSelectJourney }: Sign
                     TIER: VION {journey.tier} • {journey.duration.split("/")[0]}
                   </div>
                   <div className="absolute bottom-4 right-4 bg-black/85 backdrop-blur-md px-3.5 py-1.5 rounded-lg text-xs font-semibold text-white border border-white/10">
-                    From <span className="text-[#C5A880]">{formatPrice(journey.basePriceUSD)}</span> / guest
+                    {t.from} <span className="text-[#C5A880]">{formatPrice(journey.basePriceUSD)}</span> {t.perGuest}
                   </div>
                 </div>
 
@@ -68,12 +84,12 @@ export default function SignatureCollections({ currency, onSelectJourney }: Sign
               </div>
 
               <div className="px-6 pb-6 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-[#B4B0A5]/60">Pace: {journey.pace}</span>
+                <span className="text-[#B4B0A5]/60">{t.pace}: {journey.pace}</span>
                 <button
                   onClick={() => onSelectJourney(journey.id)}
                   className="text-[#C5A880] font-semibold hover:underline flex items-center space-x-1 cursor-pointer"
                 >
-                  <span>View Day-by-Day Plan</span>
+                  <span>{t.viewItinerary}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>

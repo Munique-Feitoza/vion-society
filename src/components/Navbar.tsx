@@ -1,25 +1,38 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Volume2, VolumeX, Menu, X } from "lucide-react";
+import { Volume2, VolumeX, Menu, X, Globe } from "lucide-react";
+import { Language, Translations } from "@/data/translations";
 
 interface NavbarProps {
   currency: string;
   setCurrency: (c: string) => void;
+  language: Language;
+  setLanguage: (l: Language) => void;
+  translations: Translations;
   onOpenBuilder: () => void;
 }
 
-export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarProps) {
+export default function Navbar({
+  currency,
+  setCurrency,
+  language,
+  setLanguage,
+  translations,
+  onOpenBuilder,
+}: NavbarProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+
   const audioCtxRef = useRef<AudioContext | null>(null);
   const whiteNoiseRef = useRef<AudioBufferSourceNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
 
   const toggleSound = () => {
     if (!audioCtxRef.current) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       audioCtxRef.current = new AudioCtx();
     }
 
@@ -79,6 +92,8 @@ export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarP
     }
   };
 
+  const t = translations.nav;
+
   return (
     <>
       <header className="sticky top-0 left-0 w-full z-40 transition-all duration-300 bg-[#0C0F12]/90 backdrop-blur-xl border-b border-white/10 px-6 py-4 lg:px-12">
@@ -95,23 +110,39 @@ export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarP
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase font-medium text-[#B4B0A5]">
-            <a href="#signature" className="hover:text-[#C5A880] transition-colors">Signature Journeys</a>
-            <a href="#route-canvas" className="hover:text-[#C5A880] transition-colors">Route Map</a>
-            <a href="#destinations" className="hover:text-[#C5A880] transition-colors">Provinces</a>
-            <a href="#villas" className="hover:text-[#C5A880] transition-colors">Stays & Villas</a>
-            <a href="#trip-builder" className="hover:text-[#C5A880] transition-colors">Trip Builder</a>
-            <a href="#know" className="hover:text-[#C5A880] transition-colors">Travel Hub</a>
+          <nav className="hidden lg:flex items-center space-x-7 text-xs tracking-[0.18em] uppercase font-medium text-[#B4B0A5]">
+            <a href="#signature" className="hover:text-[#C5A880] transition-colors">{t.journeys}</a>
+            <a href="#route-canvas" className="hover:text-[#C5A880] transition-colors">{t.routeMap}</a>
+            <a href="#destinations" className="hover:text-[#C5A880] transition-colors">{t.provinces}</a>
+            <a href="#villas" className="hover:text-[#C5A880] transition-colors">{t.villas}</a>
+            <a href="#trip-builder" className="hover:text-[#C5A880] transition-colors">{t.tripBuilder}</a>
+            <a href="#know" className="hover:text-[#C5A880] transition-colors">{t.travelHub}</a>
           </nav>
 
           {/* Right Action Controls */}
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className="flex items-center space-x-2.5 sm:space-x-3.5">
             
+            {/* Language Switcher */}
+            <div className="relative flex items-center bg-black/60 border border-white/15 rounded-full px-2.5 py-1 text-[11px] text-[#C5A880]">
+              <Globe className="w-3 h-3 mr-1 text-[#C5A880]/70" />
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+                className="bg-transparent text-[#C5A880] focus:outline-none cursor-pointer font-bold uppercase tracking-wider"
+              >
+                <option value="EN" className="bg-[#12161D]">EN</option>
+                <option value="FR" className="bg-[#12161D]">FR</option>
+                <option value="DE" className="bg-[#12161D]">DE</option>
+                <option value="AR" className="bg-[#12161D]">العربية</option>
+                <option value="PT" className="bg-[#12161D]">PT</option>
+              </select>
+            </div>
+
             {/* Currency Switcher */}
             <select
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
-              className="bg-black/60 border border-white/15 rounded-full text-[11px] text-[#C5A880] px-3 py-1.5 focus:outline-none focus:border-[#C5A880] cursor-pointer font-medium"
+              className="hidden sm:block bg-black/60 border border-white/15 rounded-full text-[11px] text-[#C5A880] px-3 py-1.5 focus:outline-none focus:border-[#C5A880] cursor-pointer font-medium"
             >
               <option value="USD">USD ($)</option>
               <option value="EUR">EUR (€)</option>
@@ -123,22 +154,22 @@ export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarP
             {/* Ambient Audio Pill */}
             <button
               onClick={toggleSound}
-              className={`hidden md:flex items-center space-x-2 text-[11px] border px-3.5 py-1.5 rounded-full transition-all cursor-pointer ${
+              className={`hidden md:flex items-center space-x-2 text-[11px] border px-3 py-1.5 rounded-full transition-all cursor-pointer ${
                 isPlaying
                   ? "border-[#C5A880] text-[#C5A880] bg-[#C5A880]/15"
                   : "border-white/15 text-[#B4B0A5] hover:text-white bg-white/5"
               }`}
             >
               {isPlaying ? <Volume2 className="w-3.5 h-3.5 animate-pulse" /> : <VolumeX className="w-3.5 h-3.5" />}
-              <span>{isPlaying ? "Ceylon Mist ♫" : "Ambient Sound"}</span>
+              <span>{isPlaying ? t.playingSound : t.ambientSound}</span>
             </button>
 
             {/* Direct CTA */}
             <button
               onClick={onOpenBuilder}
-              className="bg-[#C5A880] hover:bg-[#D8BC95] text-[#0C0F12] text-[11px] tracking-[0.15em] uppercase font-semibold px-5 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-[#C5A880]/20 hover:scale-[1.02] cursor-pointer"
+              className="bg-[#C5A880] hover:bg-[#D8BC95] text-[#0C0F12] text-[11px] tracking-[0.15em] uppercase font-semibold px-4 sm:px-5 py-2.5 rounded-full transition-all duration-300 shadow-lg shadow-[#C5A880]/20 hover:scale-[1.02] cursor-pointer"
             >
-              Curate Journey
+              {t.curateJourney}
             </button>
 
             {/* Mobile Menu Toggle */}
@@ -168,22 +199,31 @@ export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarP
             </div>
 
             <nav className="flex flex-col space-y-6 text-base tracking-[0.2em] uppercase font-light text-[#F7F4EE]">
-              <a href="#signature" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Signature Journeys</a>
-              <a href="#route-canvas" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Interactive Route Map</a>
-              <a href="#destinations" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Provinces</a>
-              <a href="#villas" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Stays & Villas</a>
-              <a href="#trip-builder" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Trip Builder</a>
-              <a href="#know" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">Travel Hub</a>
+              <a href="#signature" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.journeys}</a>
+              <a href="#route-canvas" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.routeMap}</a>
+              <a href="#destinations" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.provinces}</a>
+              <a href="#villas" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.villas}</a>
+              <a href="#trip-builder" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.tripBuilder}</a>
+              <a href="#know" onClick={() => setMobileMenuOpen(false)} className="hover:text-[#C5A880]">{t.travelHub}</a>
             </nav>
           </div>
 
           <div className="pt-6 border-t border-white/10 space-y-4">
-            <button
-              onClick={toggleSound}
-              className="w-full border border-white/15 text-xs py-3 rounded-full text-[#B4B0A5] flex items-center justify-center space-x-2"
-            >
-              <span>{isPlaying ? "Mute Ceylon Mist ♫" : "Play Ceylon Rainforest Ambient Audio ♫"}</span>
-            </button>
+            <div className="flex justify-center gap-3 py-2">
+              {(['EN', 'FR', 'DE', 'AR', 'PT'] as Language[]).map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLanguage(l)}
+                  className={`px-3 py-1 text-xs rounded-full border ${
+                    language === l
+                      ? "border-[#C5A880] bg-[#C5A880] text-[#0C0F12] font-bold"
+                      : "border-white/10 text-white"
+                  }`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -191,7 +231,7 @@ export default function Navbar({ currency, setCurrency, onOpenBuilder }: NavbarP
               }}
               className="w-full bg-[#C5A880] text-[#0C0F12] text-xs font-semibold py-3.5 rounded-full text-center tracking-widest uppercase"
             >
-              Curate Your Journey →
+              {t.curateJourney} →
             </button>
           </div>
         </div>

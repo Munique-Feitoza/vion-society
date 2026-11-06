@@ -3,14 +3,27 @@
 import { useState } from "react";
 import { STAYS, CURRENCY_RATES, Stay } from "@/data/vionData";
 import { ArrowRight, Hotel } from "lucide-react";
+import { Translations } from "@/data/translations";
 
 interface StaysShowcaseProps {
   currency: string;
   onSelectStay: (stay: Stay) => void;
+  translations?: Translations["villas"];
 }
 
-export default function StaysShowcase({ currency, onSelectStay }: StaysShowcaseProps) {
+export default function StaysShowcase({ currency, onSelectStay, translations }: StaysShowcaseProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  const t = translations || {
+    tag: "Sanctuaries & Retreats",
+    title: "Handpicked Private Stays",
+    all: "All Stays",
+    heritage: "Heritage",
+    glamping: "Glamping",
+    wellness: "Wellness",
+    quickView: "Quick View",
+    night: "/ night",
+  };
 
   const formatPrice = (usd: number) => {
     const cfg = CURRENCY_RATES[currency] || CURRENCY_RATES.USD;
@@ -23,6 +36,14 @@ export default function StaysShowcase({ currency, onSelectStay }: StaysShowcaseP
     ? STAYS
     : STAYS.filter((s) => s.category === activeCategory);
 
+  const getCategoryLabel = (cat: string) => {
+    if (cat === "all") return t.all;
+    if (cat === "heritage") return t.heritage;
+    if (cat === "glamping") return t.glamping;
+    if (cat === "wellness") return t.wellness;
+    return cat.charAt(0).toUpperCase() + cat.slice(1);
+  };
+
   return (
     <section id="villas" className="py-24 px-6 lg:px-12 bg-[#0C0F12]">
       <div className="max-w-7xl mx-auto">
@@ -30,9 +51,9 @@ export default function StaysShowcase({ currency, onSelectStay }: StaysShowcaseP
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-semibold block mb-3 flex items-center gap-2">
-              <Hotel className="w-3.5 h-3.5" /> Sanctuaries & Retreats
+              <Hotel className="w-3.5 h-3.5" /> {t.tag}
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">Handpicked Private Stays</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">{t.title}</h2>
           </div>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
             {["all", "heritage", "glamping", "wellness"].map((cat) => (
@@ -45,7 +66,7 @@ export default function StaysShowcase({ currency, onSelectStay }: StaysShowcaseP
                     : "border-white/10 text-[#B4B0A5] hover:border-[#C5A880] bg-white/5"
                 }`}
               >
-                {cat === "all" ? "All Stays" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                {getCategoryLabel(cat)}
               </button>
             ))}
           </div>
@@ -89,13 +110,13 @@ export default function StaysShowcase({ currency, onSelectStay }: StaysShowcaseP
 
               <div className="px-5 pb-5 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
                 <span className="text-[#C5A880] font-semibold">
-                  {formatPrice(stay.pricePerNightUSD)} <span className="text-[10px] text-white/50">/ night</span>
+                  {formatPrice(stay.pricePerNightUSD)} <span className="text-[10px] text-white/50">{t.night}</span>
                 </span>
                 <button
                   onClick={() => onSelectStay(stay)}
                   className="text-white hover:text-[#C5A880] font-medium flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Quick View</span>
+                  <span>{t.quickView}</span>
                   <ArrowRight className="w-3 h-3" />
                 </button>
               </div>

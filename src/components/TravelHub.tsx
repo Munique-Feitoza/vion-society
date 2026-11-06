@@ -1,8 +1,19 @@
 "use client";
 
 import { FileCheck, Sun, DollarSign, Car } from "lucide-react";
+import { Translations } from "@/data/translations";
 
-export default function TravelHub() {
+interface TravelHubProps {
+  translations?: Translations["travelHub"];
+}
+
+export default function TravelHub({ translations }: TravelHubProps) {
+  const t = translations || {
+    tag: "Practical Intelligence",
+    title: "Know Before You Depart",
+    desc: "Essential curated guidance for smooth arrivals and culturally attuned expeditions.",
+  };
+
   const items = [
     {
       icon: FileCheck,
@@ -31,13 +42,13 @@ export default function TravelHub() {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-semibold block mb-3">
-            Practical Intelligence
+            {t.tag}
           </span>
           <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">
-            Know Before You Depart
+            {t.title}
           </h2>
           <p className="text-xs text-[#B4B0A5] mt-2 font-light">
-            Essential curated guidance for smooth arrivals and culturally attuned expeditions.
+            {t.desc}
           </p>
         </div>
 

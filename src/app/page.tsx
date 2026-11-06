@@ -13,12 +13,16 @@ import Footer from "@/components/Footer";
 import ItineraryDrawer from "@/components/ItineraryDrawer";
 import StayModal from "@/components/StayModal";
 import { JOURNEYS, Journey, Stay } from "@/data/vionData";
+import { Language, TRANSLATIONS } from "@/data/translations";
 
 export default function Home() {
   const [currency, setCurrency] = useState<string>("USD");
+  const [language, setLanguage] = useState<Language>("EN");
   const [selectedJourney, setSelectedJourney] = useState<Journey | null>(null);
   const [selectedStay, setSelectedStay] = useState<Stay | null>(null);
   const [builderPrefillNotes, setBuilderPrefillNotes] = useState<string>("");
+
+  const t = TRANSLATIONS[language] || TRANSLATIONS.EN;
 
   const handleSelectJourney = (journeyId: string) => {
     const found = JOURNEYS.find((j) => j.id === journeyId) || null;
@@ -52,37 +56,44 @@ export default function Home() {
       <Navbar
         currency={currency}
         setCurrency={setCurrency}
+        language={language}
+        setLanguage={setLanguage}
+        translations={t}
         onOpenBuilder={handleOpenBuilder}
       />
 
       {/* Hero Section */}
-      <Hero />
+      <Hero translations={t.hero} />
 
       {/* Signature Collections (HEAVEN / SIGNATURE / CURATED) */}
       <SignatureCollections
         currency={currency}
+        translations={t.signature}
         onSelectJourney={handleSelectJourney}
       />
 
       {/* Interactive Ceylon Geospatial Route Explorer */}
       <InteractiveRouteMap
+        translations={t.routeMap}
         onIncludeRegion={handleIncludeRegion}
       />
 
       {/* Handpicked Private Stays & Villas */}
       <StaysShowcase
         currency={currency}
+        translations={t.villas}
         onSelectStay={(stay) => setSelectedStay(stay)}
       />
 
       {/* Interactive Custom Trip Builder & Live Budget Calculator */}
       <TripBuilder
         currency={currency}
+        translations={t.tripBuilder}
         prefillNotes={builderPrefillNotes}
       />
 
       {/* Travel Hub: Know Before You Depart */}
-      <TravelHub />
+      <TravelHub translations={t.travelHub} />
 
       {/* Footer */}
       <Footer />

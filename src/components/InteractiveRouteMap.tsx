@@ -3,14 +3,24 @@
 import { useState } from "react";
 import { MAP_NODES, ROUTE_PRESETS } from "@/data/vionData";
 import { Navigation, Clock, Mountain, Sun } from "lucide-react";
+import { Translations } from "@/data/translations";
 
 interface InteractiveRouteMapProps {
   onIncludeRegion: (regionName: string) => void;
+  translations?: Translations["routeMap"];
 }
 
-export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRouteMapProps) {
+export default function InteractiveRouteMap({ onIncludeRegion, translations }: InteractiveRouteMapProps) {
   const [activePresetId, setActivePresetId] = useState<string>("grand-circuit");
   const [selectedNodeKey, setSelectedNodeKey] = useState<string>("sigiriya");
+
+  const t = translations || {
+    tag: "Geospatial Intelligence",
+    title: "The Sri Lanka Route Explorer",
+    desc: "Click any province node or circuit preset below to reveal authentic drive pacing, elevation shifts, and private transit options.",
+    includeRegion: "Include in My Trip Plan →",
+    gridNotice: "Interactive Ceylon Grid • Click Any Node",
+  };
 
   const activePreset = ROUTE_PRESETS.find((p) => p.id === activePresetId) || ROUTE_PRESETS[0];
   const currentNode = MAP_NODES[selectedNodeKey] || MAP_NODES.sigiriya;
@@ -38,12 +48,12 @@ export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRout
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-[#C5A880] font-semibold block mb-3 flex items-center gap-2">
-              <Navigation className="w-3.5 h-3.5" /> Geospatial Intelligence
+              <Navigation className="w-3.5 h-3.5" /> {t.tag}
             </span>
-            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">The Sri Lanka Route Explorer</h2>
+            <h2 className="font-serif text-4xl sm:text-5xl text-white font-light">{t.title}</h2>
           </div>
           <p className="text-[#B4B0A5] max-w-md text-sm mt-4 md:mt-0 font-light leading-relaxed">
-            Click any province node or circuit preset below to reveal authentic drive pacing, elevation shifts, and private transit options.
+            {t.desc}
           </p>
         </div>
 
@@ -70,7 +80,7 @@ export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRout
           {/* Vector Map Container */}
           <div className="lg:col-span-7 glass-card p-6 rounded-3xl border border-white/10 relative overflow-hidden flex flex-col items-center justify-center min-h-[480px] bg-[#171D26]">
             <div className="absolute top-4 left-4 text-[10px] uppercase tracking-widest text-[#C5A880] font-semibold">
-              Interactive Ceylon Grid • Click Any Node
+              {t.gridNotice}
             </div>
 
             <svg viewBox="50 80 260 420" className="w-full max-w-sm h-auto select-none" style={{ filter: "drop-shadow(0 15px 30px rgba(0,0,0,0.7))" }}>
@@ -113,9 +123,21 @@ export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRout
                       r={isSelected ? 9 : isInPreset ? 6 : 4}
                       fill={isSelected ? "#E2CCA9" : isInPreset ? "#C5A880" : "#556577"}
                       stroke={isSelected ? "#FFFFFF" : "#14181E"}
-                      strokeWidth={isSelected ? 3 : 1.5}
+                      strokeWidth={isSelected ? "2.5" : "1"}
                       className="transition-all duration-300"
                     />
+                    {isSelected && (
+                      <circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="16"
+                        fill="none"
+                        stroke="#C5A880"
+                        strokeWidth="1"
+                        opacity="0.6"
+                        className="animate-ping"
+                      />
+                    )}
                     <text
                       x={node.x + (key === "colombo" ? -55 : key === "galle" ? -50 : 12)}
                       y={node.y + 4}
@@ -144,9 +166,10 @@ export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRout
               <p className="text-xs text-[#B4B0A5] leading-relaxed mb-4 font-light">
                 {activePreset.description}
               </p>
-              <div className="text-[11px] text-[#C5A880] font-medium bg-black/40 p-2.5 rounded-xl border border-white/5 flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5" />
-                <span>{activePreset.travelStyle} • {activePreset.estDriveTotal}</span>
+              <div className="flex items-center space-x-4 text-xs text-[#B4B0A5]/80 pt-2 border-t border-white/10">
+                <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5 text-[#C5A880]" /> {activePreset.duration}</span>
+                <span>•</span>
+                <span>{activePreset.estDriveTotal}</span>
               </div>
             </div>
 
@@ -188,7 +211,7 @@ export default function InteractiveRouteMap({ onIncludeRegion }: InteractiveRout
                 onClick={() => onIncludeRegion(currentNode.name)}
                 className="w-full bg-[#C5A880] hover:bg-[#D8BC95] text-[#0C0F12] text-xs font-semibold py-3 rounded-xl transition-all shadow-md uppercase tracking-wider cursor-pointer"
               >
-                Include {currentNode.name.split(" ")[0]} in My Trip Plan →
+                {t.includeRegion}
               </button>
             </div>
 
