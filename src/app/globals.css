@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0C0F12;
+  --foreground: #F7F4EE;
+  
+  --vion-charcoal: #0C0F12;
+  --vion-noir: #12161D;
+  --vion-card: #171D26;
+  --vion-card-hover: #1E2530;
+  
+  --vion-gold: #C5A880;
+  --vion-gold-light: #E2CCA9;
+  --vion-gold-hover: #D8BC95;
+  
+  --vion-sand: #F7F4EE;
+  --vion-sand-muted: #B4B0A5;
+  
+  --vion-border: rgba(255, 255, 255, 0.1);
+  --vion-border-gold: rgba(197, 168, 128, 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --color-vion-charcoal: #0C0F12;
+  --color-vion-noir: #12161D;
+  --color-vion-card: #171D26;
+  --color-vion-card-hover: #1E2530;
+  --color-vion-gold: #C5A880;
+  --color-vion-gold-light: #E2CCA9;
+  --color-vion-gold-hover: #D8BC95;
+  --color-vion-sand: #F7F4EE;
+  --color-vion-sand-muted: #B4B0A5;
+  
+  --font-serif: var(--font-cormorant), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background-color: #0C0F12;
+  color: #F7F4EE;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #0C0F12;
+  color: #F7F4EE;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0C0F12;
+}
+::-webkit-scrollbar-thumb {
+  background: #28323F;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A880;
+}
+
+/* Gold Shimmer Typography */
+.gold-shimmer {
+  background: linear-gradient(90deg, #C5A880 0%, #F5E6D3 50%, #C5A880 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism */
+.glass-card {
+  background: rgba(20, 24, 30, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(197, 168, 128, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
 }
