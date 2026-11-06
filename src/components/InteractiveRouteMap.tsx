@@ -91,8 +91,8 @@ export default function InteractiveRouteMap({ onIncludeRegion, translations }: I
             </div>
 
             <svg
-              viewBox="40 60 280 430"
-              className="w-full max-w-md h-auto select-none my-4"
+              viewBox="0 60 340 430"
+              className="w-full max-w-lg h-auto select-none my-4 overflow-visible"
               style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.8))" }}
             >
               {/* Island Coastline Silhouette - Authentic Sri Lanka Contour */}
@@ -153,10 +153,10 @@ export default function InteractiveRouteMap({ onIncludeRegion, translations }: I
                 const isInPreset = activePreset.nodes.includes(key);
 
                 // Position label pill to avoid overlaps
-                const labelLeft = key === "colombo" || key === "galle" || key === "hatton";
+                const labelLeft = key === "colombo" || key === "galle";
                 const pillWidth = node.shortName.length * 6.5 + 14;
                 const pillX = labelLeft ? node.x - pillWidth - 10 : node.x + 10;
-                const pillY = node.y - 9;
+                const pillY = key === "hatton" ? node.y - 26 : node.y - 9;
 
                 return (
                   <g
