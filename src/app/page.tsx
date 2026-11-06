@@ -4,6 +4,7 @@ import { useState } from "react";
 import TopBar from "@/components/TopBar";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import CinematicStories from "@/components/CinematicStories";
 import SignatureCollections from "@/components/SignatureCollections";
 import InteractiveRouteMap from "@/components/InteractiveRouteMap";
 import StaysShowcase from "@/components/StaysShowcase";
@@ -64,6 +65,9 @@ export default function Home() {
 
       {/* Hero Section */}
       <Hero translations={t.hero} />
+
+      {/* Cinematic Stories & Video Chronicle */}
+      <CinematicStories />
 
       {/* Signature Collections (HEAVEN / SIGNATURE / CURATED) */}
       <SignatureCollections

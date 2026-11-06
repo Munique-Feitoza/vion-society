@@ -1,6 +1,6 @@
 "use client";
 
-import { Globe, MessageCircle } from "lucide-react";
+import { MessageCircle, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -21,15 +21,15 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="py-16 px-6 lg:px-12 max-w-4xl mx-auto">
-        <div className="font-serif text-3xl tracking-[0.35em] text-white font-medium mb-1">
-          V I O N
+        <div className="font-serif text-3xl tracking-[0.35em] text-white font-medium mb-1 whitespace-nowrap">
+          VION
         </div>
-        <div className="text-[10px] tracking-[0.45em] text-[#C5A880] uppercase mb-8 font-semibold">
-          S O C I E T Y
+        <div className="text-[10px] tracking-[0.45em] text-[#C5A880] uppercase mb-8 font-semibold whitespace-nowrap">
+          SOCIETY
         </div>
 
         <p className="text-xs max-w-lg mx-auto font-light leading-relaxed mb-8">
-          Private travel planning and curated expeditions across Sri Lanka. Colombo • Galle • Hatton • London.
+          Private bespoke travel planning and curated slow luxury expeditions across Sri Lanka. Colombo • Galle • Hatton • London.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-6 text-xs tracking-wider uppercase mb-10">
@@ -48,18 +48,16 @@ export default function Footer() {
           </a>
           <span>•</span>
           <a
-            href="https://vionsociety.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:concierge@vionsociety.com"
             className="hover:text-[#C5A880] transition-colors flex items-center gap-1.5"
           >
-            <Globe className="w-3.5 h-3.5 text-[#C5A880]" />
-            <span>Official Society</span>
+            <Mail className="w-3.5 h-3.5 text-[#C5A880]" />
+            <span>Direct Concierge Desk</span>
           </a>
           <span>•</span>
           <a
             href="#trip-builder"
-            className="text-[#C5A880] hover:underline flex items-center gap-1.5"
+            className="text-[#C5A880] hover:underline flex items-center gap-1.5 font-semibold"
           >
             <MessageCircle className="w-3.5 h-3.5" />
             <span>WhatsApp Concierge</span>
@@ -67,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="text-[11px] text-[#B4B0A5]/50 pt-8 border-t border-white/5">
-          © 2026 VION Society. All rights reserved. Designed with slow luxury engineering.
+          © 2026 VION Society. All rights reserved. The art of slow luxury in Ceylon.
         </div>
       </div>
     </footer>

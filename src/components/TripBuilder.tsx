@@ -82,7 +82,7 @@ export default function TripBuilder({ currency, prefillNotes = "", translations 
       `• *Estimated Investment:* ${formatPrice(totalUSD)} (${currency})\n` +
       (notes ? `• *Special Wishes:* ${notes}\n` : "") +
       `━━━━━━━━━━━━━━━━━━━━\n` +
-      `_Inquiry initiated from VION Society Next.js Platform_`;
+      `_Inquiry initiated via VION Society Private Concierge_`;
 
     window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, "_blank");
   };

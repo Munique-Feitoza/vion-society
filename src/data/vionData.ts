@@ -74,7 +74,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '25 mins via Expressway',
     description: 'The historic gateway to Ceylon. Rest amidst 18th-century Dutch merchant manors and tranquil coastal coconut groves before journeying inland.',
     highlights: ['The Wallawwa Manor', 'Private Cinnamon Island Boat', 'Old Colombo Dutch Hospital Dining'],
-    x: 105, y: 310
+    x: 95, y: 310
   },
   sigiriya: {
     name: 'Sigiriya & Cultural Triangle',
@@ -86,7 +86,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '3.5 hrs by private SUV (or 35 mins by Seaplane)',
     description: 'Ancient monolithic fortress rising 200m from emerald jungle. Monastic cave temples of Dambulla and giant Asian elephant gatherings in Minneriya.',
     highlights: ['Dawn VIP ascent of Lion Rock', 'Dambulla Golden Caves', 'Wild Elephant Gathering at Minneriya'],
-    x: 175, y: 190
+    x: 185, y: 170
   },
   kandy: {
     name: 'Kandy Royal Kingdom',
@@ -98,7 +98,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '2.5 hrs via Central Highway',
     description: 'The last royal bastion of Sri Lankan kings, nestled around a tranquil lake and surrounded by mist-wrapped mountain spice sanctuaries.',
     highlights: ['Temple of the Sacred Tooth Relic', 'Peradeniya Royal Botanic Gardens', 'Private Kandyan Drumming Masterclass'],
-    x: 170, y: 265
+    x: 180, y: 250
   },
   hatton: {
     name: 'Hatton & Ceylon Tea Trails',
@@ -110,7 +110,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '4 hrs by road or scenic train',
     description: 'Endless emerald valleys of single-origin Ceylon tea. Reside in restored British colonial planter bungalows with private butler service.',
     highlights: ['Castlereagh Lake Kayaking', 'Private Sommelier Tea Masterclass', 'Adam\'s Peak Sacred Vista'],
-    x: 175, y: 320
+    x: 155, y: 315
   },
   ella: {
     name: 'Ella & Cloud Peaks',
@@ -122,7 +122,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '5 hrs scenic drive',
     description: 'Dramatic mountain pass, the iconic Nine Arch viaduct bridge, secret ravine waterfalls, and dawn treks above the clouds at Little Adam\'s Peak.',
     highlights: ['Observation-Car First Class Train', 'Nine Arch Bridge at sunrise', 'Private Waterfall Natural Baths'],
-    x: 235, y: 325
+    x: 220, y: 330
   },
   yala: {
     name: 'Yala National Park',
@@ -134,7 +134,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '4.5 hrs via Southern Expressway',
     description: 'The highest leopard density on Earth. Pristine sandy beaches colliding with thorny scrub forests, sloth bears, and herds of wild Asian elephants.',
     highlights: ['Private 4x4 Leopard Tracking', 'Luxury Ocean Cocoon Glamping', 'Bundala Flamingo Wetlands'],
-    x: 265, y: 395
+    x: 255, y: 395
   },
   galle: {
     name: 'UNESCO Galle Fort',
@@ -146,7 +146,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '2 hrs via Southern Expressway',
     description: 'Living 17th-century Dutch colonial fortress. Cobblestone avenues lined with artisanal gem merchants, boutique villas, and rampart sunset cocktails.',
     highlights: ['Private Fort Ramparts Architecture Walk', 'Boutique Antique Shopping', 'Sunset Cocktails on the Bastions'],
-    x: 130, y: 440
+    x: 120, y: 435
   },
   mirissa: {
     name: 'Weligama & Mirissa Bay',
@@ -158,7 +158,7 @@ export const MAP_NODES: Record<string, MapNode> = {
     driveFromAirport: '2 hrs 15 mins via Southern Expressway',
     description: 'Private catamaran expeditions tracking the majestic blue whale in deep Indian Ocean waters, paired with secluded luxury surf beaches.',
     highlights: ['Private Chartered Whale Catamaran', 'Bespoke Private Surf Coaching', 'Oceanfront Lobster Clay-Pot Feast'],
-    x: 165, y: 455
+    x: 160, y: 450
   }
 };
 
